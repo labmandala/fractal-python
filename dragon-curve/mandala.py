@@ -12,7 +12,7 @@ def set_depth_color(depth, max_level, rotation_index, symmetry):
     hue_offset = rotation_index / symmetry * 0.25
     hue = (base_hue + hue_offset) % 1.0
 
-    r, g, b = colorsys.hsv_to_rgb(hue, 0.9, 1.0)
+    r, g, b = colorsys.hsv_to_rgb(hue, 0.6, 0.9)
     t.pencolor(r, g, b)
 
 # ---------- Dragon recursion ----------
