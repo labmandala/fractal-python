@@ -11,12 +11,23 @@ def teal_palette(depth, max_level, ring_i, ring_count, arm_i, symmetry):
     # Teal-focused hue band
     hue = (0.48 + 0.08 * (1 - d) + 0.04 * a) % 1.0
     sat = 0.75 + 0.15 * (1 - d)
-    val = 0.65 + 0.35 * (1 - r)
-    #hue = 0.52 + 0.06 * (1 - d)
-    #sat = 0.85
-    #val = 0.6 + 0.3 * (1 - r)
+    val = 0.6 + 0.4 * (1 - r)
 
     return colorsys.hsv_to_rgb(hue, sat, val)
+
+# ---------- Glow draw ----------
+def glow_forward(length, color):
+    r, g, b = color
+
+    for i in range(3, 0, -1):
+        t.pensize(1 + i * 2)
+        t.pencolor(r * 0.35, g * 0.35, b * 0.35)
+        t.forward(length)
+        t.backward(length)
+
+    t.pensize(1)
+    t.pencolor(color)
+    t.forward(length)
 
 # ---------- Dragon recursion ----------
 def left_dragon(level, length, depth, max_level, ring_i, ring_count, arm_i, symmetry):
@@ -25,8 +36,8 @@ def left_dragon(level, length, depth, max_level, ring_i, ring_count, arm_i, symm
         t.left(90)
         right_dragon(level - 1, length, depth + 1, max_level, ring_i, ring_count, arm_i, symmetry)
     else:
-        t.pencolor(teal_palette(depth, max_level, ring_i, ring_count, arm_i, symmetry))
-        t.forward(length)
+        color = teal_palette(depth, max_level, ring_i, ring_count, arm_i, symmetry)
+        glow_forward(length, color)
 
 def right_dragon(level, length, depth, max_level, ring_i, ring_count, arm_i, symmetry):
     if level > 0:
@@ -34,8 +45,8 @@ def right_dragon(level, length, depth, max_level, ring_i, ring_count, arm_i, sym
         t.right(90)
         right_dragon(level - 1, length, depth + 1, max_level, ring_i, ring_count, arm_i, symmetry)
     else:
-        t.pencolor(teal_palette(depth, max_level, ring_i, ring_count, arm_i, symmetry))
-        t.forward(length)
+        color = teal_palette(depth, max_level, ring_i, ring_count, arm_i, symmetry)
+        glow_forward(length, color)
 
 # ---------- Mandala rings ----------
 def dragon_mandala_rings(rings, base_radius, level, length):
@@ -68,7 +79,6 @@ t = turtle.Turtle()
 t.hideturtle()
 t.speed(0)
 t.pensize(1)
-#t.pensize(0.8)
 
 turtle.tracer(0, 0)
 
