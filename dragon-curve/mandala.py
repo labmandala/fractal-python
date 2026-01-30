@@ -46,7 +46,7 @@ def dragon_mandala(level, length, symmetry):
 
 # ---------- Setup ----------
 LEVEL = 12
-LINE_LENGTH = 7
+LINE_LENGTH = 4
 SYMMETRY = 6   # try 6, 8, 12
 
 screen = turtle.Screen()
