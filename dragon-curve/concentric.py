@@ -66,7 +66,7 @@ def dragon_mandala_rings(rings, base_radius, level, length):
             left_dragon(level, length, 0, level, ring_i, rings, arm_i, symmetry)
 
 # ---------- Setup ----------
-LEVEL = 10
+LEVEL = 7
 LINE_LENGTH = 5
 RINGS = 3
 BASE_RADIUS = 40
